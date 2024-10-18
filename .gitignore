@@ -1,0 +1,10 @@
+# Node.js modules
+node_modules/
+
+# Environment variables
+.env
+
+# uploads
+uploads
+
+package-lock.json
