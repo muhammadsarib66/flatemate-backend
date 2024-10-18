@@ -1,16 +1,20 @@
 const express = require("express");
 const connectDB = require("./src/config/dbConnection");
-require("dotenv").config()
-const path = require("path")
+require("dotenv").config();
+const path = require("path");
 const cors = require("cors");
 
-const userRoutes = require("./src/routes/usersRoutes")
-const bookingRoutes = require("./src/routes/bookingRoutes")
+const userRoutes = require("./src/routes/usersRoutes");
+const bookingRoutes = require("./src/routes/bookingRoutes");
 
 //MIDDLEWARE
 
 const app = express();
-app.use(cors());
+app.use(
+  cors({
+    origin: "*",
+  })
+);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
@@ -21,16 +25,16 @@ connectDB();
 
 // ROUTES
 
-app.use("/api/v1/users", userRoutes)
-app.use("/api/v1/bookings", bookingRoutes)
+app.use("/api/v1/users", userRoutes);
+app.use("/api/v1/bookings", bookingRoutes);
 app.get("/", (req, res) => {
-    res.send("<h1>Welcome to the flatemate backend</h1>")
-})
+  res.send("<h1>Welcome to the flatemate backend</h1>");
+});
 
 // SERVER
 
-PORT = process.env.PORT || 3000
+PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {
-    console.log(`Server started on port ${PORT}`);
+  console.log(`Server started on port ${PORT}`);
 });
